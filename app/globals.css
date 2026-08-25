@@ -1,0 +1,139 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, 'SFMono-Regular', monospace;
+}
+
+/* Ezra design system — cool blue, light-primary, navy console */
+@theme {
+  --color-canvas: #ffffff;
+  --color-tint: #f2f6fc;
+  --color-tint-deep: #e7effb;
+  --color-deep: #0a1833;
+  --color-deep-raised: #132546;
+
+  --color-ink: #0f1b2e;
+  --color-body: #43536e;
+  --color-muted-text: #7a8aa5;
+  --color-hairline: #dde5f0;
+  --color-hairline-dark: #223559;
+  --color-on-deep: #e9effa;
+  --color-on-deep-muted: #93a6c6;
+
+  --color-blue-600: #1747c4;
+  --color-blue-500: #1e5eff;
+  --color-blue-400: #4d8bff;
+  --color-blue-200: #a9c6ff;
+  --color-blue-50: #eef4ff;
+
+  --color-cyan: #00c2d7;
+  --color-green: #0fa97c;
+  --color-amber: #ff8a00;
+  --color-crimson: #e8092e;
+}
+
+:root {
+  color-scheme: light;
+  --background: #ffffff;
+  --foreground: #0f1b2e;
+  --card: #ffffff;
+  --card-foreground: #0f1b2e;
+  --popover: #ffffff;
+  --popover-foreground: #0f1b2e;
+  --primary: #1e5eff;
+  --primary-foreground: #ffffff;
+  --secondary: #f2f6fc;
+  --secondary-foreground: #0f1b2e;
+  --muted: #f2f6fc;
+  --muted-foreground: #43536e;
+  --accent: #eef4ff;
+  --accent-foreground: #0f1b2e;
+  --destructive: #e8092e;
+  --border: #dde5f0;
+  --input: #dde5f0;
+  --ring: #1e5eff;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-variant-numeric: tabular-nums;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  *:focus-visible {
+    outline: 2px solid var(--color-blue-500);
+    outline-offset: 2px;
+  }
+}
+
+.shadow-card {
+  box-shadow:
+    0 1px 2px rgba(15, 27, 46, 0.04),
+    0 8px 24px -12px rgba(15, 27, 46, 0.1);
+}
+
+.shadow-hero {
+  box-shadow:
+    0 2px 4px rgba(10, 24, 51, 0.06),
+    0 24px 60px -20px rgba(10, 24, 51, 0.28);
+}
+
+.hero-wash {
+  background: radial-gradient(
+    60% 50% at 50% 0%,
+    rgba(30, 94, 255, 0.12),
+    transparent 70%
+  );
+}
+
+@keyframes ezra-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: ezra-fade-up 400ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
