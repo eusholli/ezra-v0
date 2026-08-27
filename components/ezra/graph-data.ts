@@ -42,8 +42,8 @@ const ROOT_Y = 232
 const MAX_RADIUS = 470
 const HALF_ANGLE = 40
 
-export function buildGraph(): GraphData {
-  const rand = mulberry32(1337)
+export function buildGraph(seed = 1337): GraphData {
+  const rand = mulberry32(seed)
 
   type Draft = { id: number; parent: number | null; depth: number; children: number[] }
   const draft: Draft[] = [{ id: 0, parent: null, depth: 0, children: [] }]
