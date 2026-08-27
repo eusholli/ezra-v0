@@ -35,12 +35,24 @@ export type ImpactMapConfig = {
   services: ImpactMapService[]
   /** Footer line inside the dark panel. */
   panelCaption: string
+  /**
+   * When true, draw a thin ring around the implicated graph nodes (one per
+   * listed service), each in that service's severity colour, so the eye can
+   * find them against the full system.
+   */
+  ringImplicated?: boolean
 }
 
 const severityChip: Record<Severity, string> = {
   high: 'bg-crimson text-white',
   med: 'bg-amber text-deep',
   low: 'bg-cyan text-deep',
+}
+
+const severityStroke: Record<Severity, string> = {
+  high: '#e8092e',
+  med: '#ff8a00',
+  low: '#00c2d7',
 }
 
 export function ImpactMapPanel({ config }: { config: ImpactMapConfig }) {
@@ -94,6 +106,25 @@ export function ImpactMapPanel({ config }: { config: ImpactMapConfig }) {
     return s
   }, [revealed, graph.nodes])
 
+  // One ring per listed service, mapped onto the graph's emphasis nodes
+  // (crimson first, then amber), each stroked in the service's severity colour.
+  const ringTargets = useMemo(() => {
+    if (!config.ringImplicated) return []
+    const emphasis = [
+      ...graph.nodes.filter((n) => n.severity === 'crimson'),
+      ...graph.nodes.filter((n) => n.severity === 'amber'),
+    ]
+    return config.services
+      .map((service, i) => {
+        const node = emphasis[i]
+        if (!node) return null
+        return { node, color: severityStroke[service.severity] }
+      })
+      .filter((t): t is { node: (typeof emphasis)[number]; color: string } =>
+        Boolean(t),
+      )
+  }, [config.ringImplicated, config.services, graph.nodes])
+
   return (
     <div className="relative rounded-xl bg-deep shadow-hero">
       <div className="flex flex-col md:h-[460px] md:flex-row">
@@ -146,6 +177,22 @@ export function ImpactMapPanel({ config }: { config: ImpactMapConfig }) {
                   cy={node.y}
                   r={radius}
                   fill={fill}
+                />
+              )
+            })}
+            {ringTargets.map(({ node, color }) => {
+              const active = revealedSet.has(node.id)
+              return (
+                <circle
+                  key={`ring-${node.id}`}
+                  cx={node.x}
+                  cy={node.y}
+                  r={6}
+                  fill="none"
+                  stroke={color}
+                  strokeWidth={0.9}
+                  className="transition-opacity duration-500"
+                  opacity={active && settled ? 0.9 : 0}
                 />
               )
             })}
