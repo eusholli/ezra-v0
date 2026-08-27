@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 import { EzraButton } from '@/components/ezra/ezra-button'
 import { Footer } from '@/components/ezra/footer'
 import { Nav } from '@/components/ezra/nav'
@@ -18,10 +20,21 @@ export type PrototypeContent = {
   caption: string
   /** Exactly three points, laid out as three equal columns on desktop. */
   points: [PrototypePoint, PrototypePoint, PrototypePoint]
-  impactMap: ImpactMapConfig
+  /**
+   * Config for the default impact-map panel. Ignored when a custom `panel`
+   * node is supplied.
+   */
+  impactMap?: ImpactMapConfig
 }
 
-export function PrototypePage({ content }: { content: PrototypeContent }) {
+export function PrototypePage({
+  content,
+  panel,
+}: {
+  content: PrototypeContent
+  /** Optional custom hero panel. Falls back to the default impact map. */
+  panel?: ReactNode
+}) {
   return (
     <main>
       <Nav />
@@ -39,7 +52,10 @@ export function PrototypePage({ content }: { content: PrototypeContent }) {
           </div>
 
           <div className="mt-12 md:mt-16">
-            <ImpactMapPanel config={content.impactMap} />
+            {panel ??
+              (content.impactMap ? (
+                <ImpactMapPanel config={content.impactMap} />
+              ) : null)}
           </div>
 
           {/* 3. Caption line directly under the panel */}

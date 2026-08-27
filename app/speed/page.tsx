@@ -2,63 +2,29 @@ import {
   PrototypePage,
   type PrototypeContent,
 } from '@/components/ezra/prototype/prototype-page'
+import { SpeedPanel } from '@/components/ezra/prototype/speed-panel'
 
 const content: PrototypeContent = {
-  headline: 'Placeholder headline for the speed page.',
+  headline: 'Now the machine keeps up with you.',
   subheading:
-    'Placeholder subheading for the speed page. One or two sentences that sit directly beneath the headline.',
-  caption: 'placeholder caption · monospace · muted',
+    'Ezra holds a living understanding of everything you own, so the answer arrives at the speed of the question. Ask what a change touches, what it costs, what it puts at risk. You set the pace now.',
+  caption: 'The same question that took four days last quarter.',
   points: [
     {
-      title: 'Placeholder point one',
-      body: 'Placeholder paragraph for the first point. One short paragraph of body copy.',
+      title: 'You answer in the meeting, not after it.',
+      body: 'The value is not that the answer is good. You could always get a good answer eventually. The value is that it arrives while the decision is still open.',
     },
     {
-      title: 'Placeholder point two',
-      body: 'Placeholder paragraph for the second point. One short paragraph of body copy.',
+      title: 'The question does not have to be about code that exists.',
+      body: 'What would this feature touch, what would it cost, where would it hurt. A standing understanding of the system answers before anything is written, not only after the diff lands.',
     },
     {
-      title: 'Placeholder point three',
-      body: 'Placeholder paragraph for the third point. One short paragraph of body copy.',
+      title: 'Every model release makes you faster too.',
+      body: 'Each new model lands on a codebase Ezra already understands, so the gain arrives on your legacy estate instead of starting from zero. The rediscovery tax is removed.',
     },
   ],
-  impactMap: {
-    seed: 1337,
-    resolvedTotal: 1284,
-    estateTotal: 4200,
-    stats: {
-      riskLabel: 'HIGH',
-      riskSeverity: 'high',
-      servicesHit: '4',
-      relatedIncidents: '1 P1',
-      inFlightPrs: '2 conflicts',
-    },
-    services: [
-      {
-        name: 'PlaceholderServiceA',
-        severity: 'high',
-        reason: 'Placeholder reason line.',
-      },
-      {
-        name: 'PlaceholderServiceB',
-        severity: 'med',
-        reason: 'Placeholder reason line.',
-      },
-      {
-        name: 'PlaceholderServiceC',
-        severity: 'med',
-        reason: 'Placeholder reason line.',
-      },
-      {
-        name: 'PlaceholderServiceD',
-        severity: 'low',
-        reason: 'Placeholder reason line.',
-      },
-    ],
-    panelCaption: 'computed from 4,200 nodes · 11,830 edges · deterministic',
-  },
 }
 
 export default function SpeedPage() {
-  return <PrototypePage content={content} />
+  return <PrototypePage content={content} panel={<SpeedPanel />} />
 }
