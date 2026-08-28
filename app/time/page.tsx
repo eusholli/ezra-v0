@@ -10,7 +10,7 @@ import {
 const content: PrototypeContent = {
   headline: 'More time than you need.',
   subheading:
-    'Not time to keep up. Time to do the work you took this job for.',
+    'Not more hours for keeping up. Hours for the work you took this job to do.',
   caption: 'Multiply that by three thousand changes a quarter.',
   points: [
     {
