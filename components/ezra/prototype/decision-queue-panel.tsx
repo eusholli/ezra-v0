@@ -58,11 +58,11 @@ export function DecisionQueuePanel({
 
   return (
     <div className="relative rounded-xl bg-deep shadow-hero">
-      <div className="flex flex-col md:h-[460px] md:flex-row">
-        <div className="relative order-2 md:order-1 md:w-[66%]">
+      <div className="flex flex-col md:min-h-[460px] md:flex-row">
+        <div className="relative order-2 min-h-[300px] md:order-1 md:w-[66%]">
           <svg
             viewBox={`0 0 ${graph.width} ${graph.height}`}
-            className="h-[300px] w-full md:h-full"
+            className="absolute inset-0 h-full w-full"
             preserveAspectRatio="xMinYMid slice"
             role="img"
             aria-label="Dependency graph, fully resolved and at rest, with the two nodes touched by today's escalated decisions ringed"
